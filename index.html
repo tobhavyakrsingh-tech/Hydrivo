@@ -68,6 +68,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .ic{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);display:flex;gap:10px}
 .ic button,#tap{font:inherit;font-size:14px;color:#f4f6f8;background:rgba(10,24,40,.55);border:1px solid rgba(222,186,116,.65);border-radius:22px;padding:9px 18px;cursor:pointer;backdrop-filter:blur(6px)}
 #tap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:18px;padding:14px 28px}#tap[hidden]{display:none}
+.ld{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#f4f6f8;letter-spacing:.3em;font-size:16px;font-weight:300}.ld[hidden]{display:none}.ld svg{animation:pl 1.2s ease-in-out infinite;filter:drop-shadow(0 0 12px #1b8fe0)}@keyframes pl{50%{transform:scale(1.15);opacity:.7}}@media (prefers-reduced-motion:reduce){.ld svg{animation:none}}
 body.lock{overflow:hidden}
 .btn.add{border:0;cursor:pointer;font-family:inherit;margin-top:8px;justify-self:start}
 #cartbtn{font:inherit;font-size:14px;height:40px;padding:0 14px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:8px;flex:none}
@@ -118,22 +119,22 @@ footer{padding:40px max(18px,4vw);border-top:1px solid var(--line);color:var(--m
 </style>
 </head>
 <body>
-<div id="intro" role="dialog" aria-label="HYDRIVO intro film"><video id="iv" muted playsinline preload="auto"></video><button id="tap" type="button" hidden>Tap to watch</button><div class="ic"><button id="snd" type="button" aria-pressed="false">Sound on</button><button id="skip" type="button">Skip intro</button></div></div>
+<div id="intro" role="dialog" aria-label="HYDRIVO intro film"><video id="iv" muted playsinline preload="auto"></video><div class="ld" id="ld" aria-hidden="true"><svg width="34" height="44" viewBox="0 0 22 28"><path d="M11 1C15 9 20 13 20 18a9 9 0 0 1-18 0c0-5 5-9 9-17z" fill="#1b8fe0"/></svg><span>HYDRIVO</span></div><button id="tap" type="button" hidden>Tap to watch</button><div class="ic"><button id="snd" type="button" aria-pressed="false">Sound on</button><button id="skip" type="button">Skip intro</button></div></div>
 <script>
 (function(){
-  const it=document.getElementById('intro'),v=document.getElementById('iv'),tap=document.getElementById('tap');
+  const it=document.getElementById('intro'),v=document.getElementById('iv'),tap=document.getElementById('tap'),ld=document.getElementById('ld');
   const SRC={land:'intro-landscape.mp4',port:'intro-portrait.mp4'};
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){it.remove();return}
+  
   document.body.classList.add('lock');let gone=false;
   function end(){if(gone)return;gone=true;it.classList.add('out');document.body.classList.remove('lock');v.pause();setTimeout(()=>it.remove(),900)}
   v.src=innerWidth>=innerHeight?SRC.land:SRC.port;
   v.addEventListener('ended',end);v.addEventListener('error',end);
-  v.play().catch(()=>{tap.hidden=false});
+  const t0=performance.now();function go(){ld.hidden=true;v.play().catch(()=>{tap.hidden=false})}setTimeout(function w(){if(v.readyState>=3||performance.now()-t0>7000)go();else setTimeout(w,200)},2000);
   tap.onclick=()=>{tap.hidden=true;v.play().catch(end)};
   document.getElementById('skip').onclick=end;
   document.getElementById('snd').onclick=function(){v.muted=!v.muted;this.textContent=v.muted?'Sound on':'Sound off';this.setAttribute('aria-pressed',!v.muted)};
   document.addEventListener('keydown',e=>{if(e.key==='Escape')end()});
-  setTimeout(()=>{if(!gone&&v.paused&&v.currentTime===0&&tap.hidden)end()},6000);
+  setTimeout(()=>{if(!gone&&v.paused&&v.currentTime===0&&tap.hidden)end()},11000);
 })();
 </script>
 <header>
