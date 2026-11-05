@@ -238,10 +238,10 @@ footer{padding:40px max(18px,4vw);border-top:1px solid var(--line);color:var(--m
 <section id="pricing"><div class="wrap">
   <div class="head"><h2>Simple, clear pricing</h2><p class="mut">Both models clean and store your washer water the same way. Advanced adds the smart layer for ₹4,000 more.</p></div>
   <div class="two">
-    <div class="card pc"><span class="tag">Essential</span><h3>HYDRIVO Basic</h3><p>Smart. Compact. Essential.</p><div class="amt">₹2,999<small>one-time price</small></div>
-      <ul class="chk ok"><li>Lint mesh and 5-micron filter</li><li>50–100 L storage tank</li><li>Gravity tap: no pump, no power</li><li>Level sight tube</li><li>Reuse for mopping and gardening</li></ul><button class="btn add" data-add="0">Add to cart · ₹2,999</button></div>
-    <div class="card pc best"><span class="tag">Most connected</span><h3>HYDRIVO Advanced</h3><p>Smarter. Connected. Future-ready.</p><div class="amt">₹6,999<small>one-time price</small></div>
-      <ul class="chk ok"><li>Everything in Basic</li><li>Two-stage filtration</li><li>Automated pump</li><li>Small touch display</li><li>Control board with built-in Wi-Fi and app</li><li>Filter life alerts and usage insights</li></ul><button class="btn add" data-add="1">Add to cart · ₹6,999</button></div>
+    <div class="card pc"><span class="tag">Essential</span><h3>HYDRIVO Basic</h3><p>Smart. Compact. Essential.</p><div class="amt">₹3,999<small>one-time price</small></div>
+      <ul class="chk ok"><li>Lint mesh and 5-micron filter</li><li>50–100 L storage tank</li><li>Gravity tap: no pump, no power</li><li>Level sight tube</li><li>Reuse for mopping and gardening</li></ul><button class="btn add" data-add="0">Add to cart · ₹3,999</button></div>
+    <div class="card pc best"><span class="tag">Most connected</span><h3>HYDRIVO Advanced</h3><p>Smarter. Connected. Future-ready.</p><div class="amt">₹7,999<small>one-time price</small></div>
+      <ul class="chk ok"><li>Everything in Basic</li><li>Two-stage filtration</li><li>Automated pump</li><li>Small touch display</li><li>Control board with built-in Wi-Fi and app</li><li>Filter life alerts and usage insights</li></ul><button class="btn add" data-add="1">Add to cart · ₹7,999</button></div>
   </div>
   <div class="diff"><b>₹4,000</b><span>is the price difference. It pays for the screen, the Wi-Fi app, filter alerts, usage insights, the automated pump and the second filter stage.</span></div>
   <p class="note">Replacement filters are about ₹500 a year for either model. These are indicative concept prices and may change at launch.</p>
@@ -289,7 +289,7 @@ footer{padding:40px max(18px,4vw);border-top:1px solid var(--line);color:var(--m
   <details><summary>Does it need electricity?</summary><p>Basic needs none: the water flows by gravity. Advanced uses a little mains power for the pump, screen and Wi-Fi.</p></details>
   <details><summary>Will it work with my washing machine?</summary><p>HYDRIVO connects to the washer’s standard drain hose. It suits most front-load and top-load machines. Check your machine’s hose size before buying.</p></details>
   <details><summary>Which detergent should I use?</summary><p>Mild, plant-friendly detergents work best. Heavy bleach or strong chemicals make the water unsuitable for plants.</p></details>
-  <details><summary>How much does HYDRIVO cost?</summary><p>HYDRIVO Basic is ₹2,999 and HYDRIVO Advanced is ₹6,999. Replacement filters are about ₹500 a year. These are indicative prices and may change at launch.</p></details>
+  <details><summary>How much does HYDRIVO cost?</summary><p>HYDRIVO Basic is ₹3,999 and HYDRIVO Advanced is ₹7,999. Replacement filters are about ₹500 a year. These are indicative prices and may change at launch.</p></details>
   <details><summary>What do I get with Advanced?</summary><p>A touch display, a Wi-Fi app, filter-life alerts, real-time usage insights and an automated pump on top of everything in Basic.</p></details>
 </div></section>
 
@@ -419,7 +419,7 @@ function setUnit(adv){
   unit.userData.L.forEach(l=>{const e=document.createElement('div');e.className='l';e.innerHTML='<b>'+l[0]+'</b>'+(l[1]?'<i>'+l[1]+'</i>':'');lblBox.appendChild(e);
     const ln=document.createElementNS('http://www.w3.org/2000/svg','line'),dt=document.createElementNS('http://www.w3.org/2000/svg','circle');dt.setAttribute('r',4);ld.append(ln,dt);
     labelEls.push({e,ln,dt,p:new THREE.Vector3(...l[2]),tag:l[3],side:l[4],dy:l[5]})});
-  const n=INFO[+adv];document.getElementById('card').innerHTML='<h2>'+n[0]+'</h2><p>'+n[1]+'</p><ul>'+n[2].map(x=>'<li>'+x+'</li>').join('')+'</ul><button class="btn sm add" style="margin-top:12px" data-add="'+(+adv)+'">Add to cart · ₹'+(adv?'6,999':'2,999')+'</button>';
+  const n=INFO[+adv];document.getElementById('card').innerHTML='<h2>'+n[0]+'</h2><p>'+n[1]+'</p><ul>'+n[2].map(x=>'<li>'+x+'</li>').join('')+'</ul><button class="btn sm add" style="margin-top:12px" data-add="'+(+adv)+'">Add to cart · ₹'+(adv?'7,999':'3,999')+'</button>';
   setMode(mode);
 }
 function seg(id,fn){document.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on');fn(b.dataset.v)})}
@@ -472,7 +472,7 @@ const v3=new THREE.Vector3();
 (function(){
   /* ---- SET THESE to receive real orders ---- */
   const CONFIG={whatsapp:'',email:'',paymentLink:''}; // whatsapp: digits with country code, e.g. '919876543210'; paymentLink: e.g. a Razorpay payment link
-  const P={0:{n:'HYDRIVO Basic',p:2999},1:{n:'HYDRIVO Advanced',p:6999}};
+  const P={0:{n:'HYDRIVO Basic',p:3999},1:{n:'HYDRIVO Advanced',p:7999}};
   let cart={},view='cart',last=null;
   const $=i=>document.getElementById(i),fm=n=>'₹'+n.toLocaleString('en-IN');
   try{cart=JSON.parse(localStorage.getItem('hv-cart')||'{}')}catch(e){cart={}}
